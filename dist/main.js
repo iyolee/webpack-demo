@@ -90,11 +90,10 @@
 /*!*****************************!*\
   !*** ./src/loader/index.js ***!
   \*****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"[hash].js\");\n\n//# sourceURL=webpack:///./src/loader/index.js?");
+eval("const a = 'hello world';\n\n//# sourceURL=webpack:///./src/loader/index.js?");
 
 /***/ })
 

@@ -84,11 +84,12 @@ Tabpack 提供了同步和异步绑定 hook 的方法，并且都有绑定事件
 ### 运行环境
 plugin 没有像 loader 那样的独立运行环境`loader runner`，只能在 webpack 里面运行。
 
-### plugin 代码结构：
+### plugin 基本结构：
 
-一个最简单的 plugin 代码结构：
+一个基本的 plugin 代码结构：
 
 ``` js
+// 插件名称
 class MyPlugin {
   apply(compiler) {
     compiler.hooks.done.tap(' My Plugin', (
@@ -101,3 +102,56 @@ class MyPlugin {
 }
 module.exports = MyPlugin;
 ```
+
+一个 plugin 的构成：
+- 一个具名 JavaScript 函数。
+- 在它的原型上定义 apply 方法。
+- 指定一个触及到 webpack 本身的事件钩子。
+- 操作 webpack 内部的实例特定数据。
+- 在实现功能后调用 webpack 提供的 callback。
+
+### 运行 plugin
+实现 plugin 必要部分，将一个 plugin demo 运行来。
+
+`demo-plugin.js`
+
+``` js
+module.exports = class DemoPlugin {
+  constructor(options) {
+    this.options = options;
+  }
+  apply() {
+    console.log('plugin', this.options);
+  }
+};
+```
+
+`webpack.config.js`
+
+``` js
++ const DemoPlugin = require('./src/plugin/demo-plugin.js');
+
++ plugins: [new DemoPlugin({ name: 'Ops' })],
+```
+
+### plugin 获取参数
+上面的 demo 可以看到，plugin 获取参数直接**通过 plugin 的构造函数进行获取**。
+
+![](../images/plugin.png)
+
+### plugin 的错误处理
+- 参数校验阶段可以直接 throw 的方式抛出
+
+``` js
+throw new Error('Error Message');
+```
+
+- 通过`compilation`对象的`warnings`和`errors`接收
+
+``` js
+compilation.warnings.push('warning');
+compilation.errors.push('error');
+```
+
+### plugin 的能力边界
+可以认为，plugin 的能力边界取决于我们对 webpack compiler 和每个独立的 compilation 的理解程度。通过 plugin，借助 webpack 引擎可以做到无穷无尽的事情。比如，可以重新格式化已有的文件，创建衍生的文件，或者制作全新的生成文件。

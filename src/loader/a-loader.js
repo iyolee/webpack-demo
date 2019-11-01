@@ -1,8 +1,8 @@
-const loaderUtils = require('loader-utils');
+// const loaderUtils = require('loader-utils');
 
 module.exports = function (source) {
-  // console.log('Loader a is excuted!');
-  // return source;
+  console.log('Loader a is excuted!');
+  return source;
 
   // this.callback(null, source);
   // return;

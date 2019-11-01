@@ -1,5 +1,9 @@
 const path = require('path');
 
+const DemoPlugin = require('./src/plugin/demo-plugin.js');
+
+const ZipPlugin = require('./src/plugin/zip-plugin');
+
 module.exports = {
   mode: "development",
   entry: path.join(__dirname, 'src/loader/index.js'),
@@ -7,6 +11,10 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'main.js'
   },
+  plugins: [
+    new DemoPlugin({ name: 'Ops' }),
+    new ZipPlugin({ filename: 'dist' })
+  ],
   module: {
     rules: [
       {
@@ -22,5 +30,5 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
 }
