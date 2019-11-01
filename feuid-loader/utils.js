@@ -44,7 +44,8 @@ function parseHTML(source) {
 }
 
 function generateUuid() {
-  return +new Date();
+  let count = 0;
+  return ( Date.now() + parseInt( Math.random() *  Math.pow( 10, 12 ) ) + count++ ).toString( 16 );
 }
 
 module.exports = function travelDir (dir) {
