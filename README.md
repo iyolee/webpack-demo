@@ -1,4 +1,4 @@
-# webpack-demo
+# webpack-space
 
 > 不做 Webpack 配置工程师，我们还能做些什么呢？
 
