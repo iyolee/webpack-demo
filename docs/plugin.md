@@ -120,8 +120,12 @@ module.exports = class DemoPlugin {
   constructor(options) {
     this.options = options;
   }
-  apply() {
-    console.log('plugin', this.options);
+  // webpack 会调用 DemoPlugin 实例的 apply 方法给插件实例传入 compiler 对象
+  apply(compiler)) {
+    // 通过 compiler.plugin(事件名称, 回调函数) 监听到 Webpack 广播出来的事件
+    compiler.plugin('compilation',function(compilation) {
+      console.log('plugin', this.options);
+    })
   }
 };
 ```
@@ -153,5 +157,11 @@ compilation.warnings.push('warning');
 compilation.errors.push('error');
 ```
 
-### plugin 的能力边界
-可以认为，plugin 的能力边界取决于我们对 webpack compiler 和每个独立的 compilation 的理解程度。通过 plugin，借助 webpack 引擎可以做到无穷无尽的事情。比如，可以重新格式化已有的文件，创建衍生的文件，或者制作全新的生成文件。
+### Compiler 和 Compilation
+可以认为，plugin 的能力边界取决于我们对 webpack compiler 和每个独立的 compilation 的理解程度，它们是 Plugin 和 Webpack 之间的桥梁。
+
+Compiler 和 Compilation 的含义如下：
+- Compiler 对象包含了 webpack 环境所有的的配置信息，包含 options，loaders，plugins 这些信息，这个对象在 webpack 启动时候被实例化，它是全局唯一的，可以简单地把它理解为 webpack 实例；
+- Compilation 对象包含了当前的模块资源、编译生成资源、变化的文件等。当 webpack 以开发模式运行时，每当检测到一个文件变化，一次新的 Compilation 将被创建。Compilation 对象也提供了很多事件回调供插件做扩展。通过 Compilation 也能读取到 Compiler 对象。
+
+**Compiler 代表了整个 webpack 从启动到关闭的生命周期，而 Compilation 只是代表了一次新的编译。**
