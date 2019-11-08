@@ -86,7 +86,7 @@ compile 阶段主要是为了进入 make 阶段做准备，make 阶段才是从�
 #### 2. make
 从 entry 开始递归去分析依赖，对每个依赖模块进行 build。
 
-#### 3. normal-module-loader
+#### 3. build-module
 将 loader 加载完成的 module 进行编译，生成 AST。
 
 #### 4. program
