@@ -11,6 +11,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@babel/parser": "^7.11.3",
+    "@babel/traverse": "^7.11.0",
+    "@babel/types": "^7.11.0",
     "jszip": "^3.2.2",
     "loader-runner": "^3.0.0",
     "loader-utils": "^1.2.3",

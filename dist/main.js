@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/loader/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/test/errorCaptured.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/loader/index.js":
-/*!*****************************!*\
-  !*** ./src/loader/index.js ***!
-  \*****************************/
+/***/ "./src/test/errorCaptured.js":
+/*!***********************************!*\
+  !*** ./src/test/errorCaptured.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("const a = 'hello world';\n\n//# sourceURL=webpack:///./src/loader/index.js?");
+eval("async function testAsync() {\n  let a = await 6666;\n  return a;\n}\n\nasync function func() {\n  await new Promise((resolve,reject)=>{\n      reject('抛出错误')\n  })\n}\n\n//# sourceURL=webpack:///./src/test/errorCaptured.js?");
 
 /***/ })
 

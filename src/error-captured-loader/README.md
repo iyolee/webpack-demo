@@ -1,0 +1,2 @@
+- @babel/parser: 将文件转换为 AST 抽象语法树
+- @babel/traverse: 遍历的节点和钩子函数的名字相同时，会执行对应的回调
